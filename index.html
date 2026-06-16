@@ -37,16 +37,15 @@
     --display: 'Sora', var(--sans);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; }
+  body { background: var(--bg); color: var(--ink); font-family: var(--sans); line-height: 1.5; -webkit-font-smoothing: antialiased; padding-bottom: 76px; }
   .eyebrow { font-size: 11px; letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; }
 
-  /* ===== App bar ===== */
   .appbar { background: var(--surface); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
   .appbar-inner { max-width: 1220px; margin: 0 auto; padding: 0 28px; height: 64px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
   .brand { display: flex; align-items: center; gap: 13px; }
   .mark { width: 38px; height: 38px; flex: none; }
   .brand-text .name { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: 0.02em; color: var(--ink); line-height: 1; }
-  .brand-text .full { font-size: 10.5px; color: var(--ink-faint); margin-top: 3px; letter-spacing: 0.01em; }
+  .brand-text .full { font-size: 10.5px; color: var(--ink-faint); margin-top: 3px; }
   .switch { display: inline-flex; background: var(--surface-2); border: 1px solid var(--line); border-radius: 11px; padding: 4px; gap: 3px; }
   .switch button { background: none; border: none; color: var(--ink-soft); font-family: var(--sans); font-size: 13px; font-weight: 600; padding: 8px 16px; border-radius: 8px; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 7px; }
   .switch button .ico { width: 7px; height: 7px; border-radius: 50%; background: currentColor; opacity: 0.4; }
@@ -54,58 +53,52 @@
   .switch button.active .ico { opacity: 1; background: #fff; }
   .switch button:not(.active):hover { color: var(--ink); }
 
-  .wrap { max-width: 1220px; margin: 0 auto; padding: 26px 28px 64px; }
+  .wrap { max-width: 1220px; margin: 0 auto; padding: 24px 28px 40px; }
 
-  /* ===== Run context ribbon ===== */
-  .ribbon { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 22px; }
-  .ribbon .ctx { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
-  .ribbon .ctx .item { font-size: 12.5px; color: var(--ink-soft); }
-  .ribbon .ctx .item b { color: var(--ink); font-weight: 600; }
-  .ribbon .run-id { font-size: 11.5px; color: var(--ink-faint); font-family: ui-monospace, monospace; background: var(--surface); border: 1px solid var(--line); padding: 6px 11px; border-radius: 8px; }
+  /* ===== Process header (el proceso es el punto de partida) ===== */
+  .proc-hero { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
+  .proc-hero .top { display: flex; justify-content: space-between; align-items: flex-start; gap: 18px; flex-wrap: wrap; }
+  .proc-hero h1 { font-family: var(--display); font-size: 21px; font-weight: 700; letter-spacing: -0.005em; }
+  .proc-hero .selector { display: inline-flex; align-items: center; gap: 8px; font-size: 12.5px; color: var(--ink-soft); background: var(--surface-2); border: 1px solid var(--line); border-radius: 9px; padding: 7px 12px; cursor: pointer; }
+  .proc-hero .selector b { color: var(--ink); font-weight: 600; }
+  .proc-hero .selector .chev { color: var(--ink-faint); }
+  .proc-meta { display: flex; gap: 20px; flex-wrap: wrap; margin-top: 13px; font-size: 12.5px; color: var(--ink-soft); }
+  .proc-meta b { color: var(--ink); font-weight: 600; }
+  .proc-state { display: inline-flex; align-items: center; gap: 7px; font-size: 12px; font-weight: 600; padding: 4px 11px; border-radius: 20px; }
+  .proc-state .dot { width: 7px; height: 7px; border-radius: 50%; }
+  .state-alerta { background: var(--extremo-bg); color: var(--extremo); }
+  .state-alerta .dot { background: var(--extremo); }
 
-  /* ===== Events ===== */
-  .section-label { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
-  .section-label .eyebrow { white-space: nowrap; }
-  .section-label .rule { height: 1px; background: var(--line); flex: 1; }
-  .events-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-bottom: 26px; }
-  .event-card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 15px 17px; box-shadow: var(--shadow-sm); position: relative; overflow: hidden; cursor: pointer; transition: transform 0.12s, box-shadow 0.12s; }
-  .event-card:hover { transform: translateY(-1px); box-shadow: var(--shadow); }
-  .event-card::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 4px; }
-  .event-card.sev-extremo::before { background: var(--extremo); }
-  .event-card.sev-alto::before { background: var(--alto); }
-  .event-card.sev-moderado::before { background: var(--moderado); }
-  .event-card .ev-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-bottom: 7px; }
-  .event-card .ev-proc { font-size: 10.5px; color: var(--brand-dark); font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-  .event-card .ev-sev { font-size: 10px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.03em; }
-  .sev-extremo .ev-sev { background: var(--extremo-bg); color: var(--extremo); }
-  .sev-alto .ev-sev { background: var(--alto-bg); color: var(--alto); }
-  .sev-moderado .ev-sev { background: var(--moderado-bg); color: var(--moderado); }
-  .event-card .ev-title { font-size: 13.5px; font-weight: 600; color: var(--ink); line-height: 1.4; }
-  .event-card .ev-foot { display: flex; justify-content: space-between; align-items: center; margin-top: 9px; }
-  .event-card .ev-meta { font-size: 12px; color: var(--ink-soft); font-weight: 500; }
-  .event-card .ev-time { font-size: 11px; color: var(--ink-faint); }
+  /* eventos del proceso, subordinados */
+  .proc-events { margin-top: 16px; border-top: 1px solid var(--line-soft); padding-top: 14px; }
+  .proc-events .pe-label { font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; margin-bottom: 10px; display: flex; align-items: center; gap: 7px; }
+  .pe-list { display: flex; flex-direction: column; gap: 9px; }
+  .pe-item { display: flex; align-items: center; gap: 12px; padding: 10px 12px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); border-left-width: 3px; }
+  .pe-item.sev-extremo { border-left-color: var(--extremo); }
+  .pe-item.sev-alto { border-left-color: var(--alto); }
+  .pe-item.sev-moderado { border-left-color: var(--moderado); }
+  .pe-item .pe-body { flex: 1; }
+  .pe-item .pe-title { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .pe-item .pe-meta { font-size: 11.5px; color: var(--ink-soft); margin-top: 1px; }
+  .pe-item .pe-time { font-size: 11px; color: var(--ink-faint); white-space: nowrap; }
+  .pe-badge { font-size: 9.5px; font-weight: 700; padding: 2px 8px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.03em; white-space: nowrap; }
+  .sev-extremo .pe-badge { background: var(--extremo-bg); color: var(--extremo); }
+  .sev-alto .pe-badge { background: var(--alto-bg); color: var(--alto); }
+  .sev-moderado .pe-badge { background: var(--moderado-bg); color: var(--moderado); }
 
   section.view { display: none; }
   section.view.active { display: block; animation: fade 0.25s ease; }
   @keyframes fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
 
   .panel { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 19px 21px; margin-bottom: 14px; box-shadow: var(--shadow-sm); }
-  .panel h2 { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 3px; letter-spacing: 0.005em; }
+  .panel h2 { font-family: var(--display); font-size: 15px; font-weight: 700; margin-bottom: 3px; }
   .panel .sub { font-size: 12px; color: var(--ink-faint); margin-bottom: 16px; }
   .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .row-12-1 { display: grid; grid-template-columns: 1.4fr 1fr; gap: 14px; }
 
-  /* ===== exec summary ===== */
-  .exec { background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%); border-radius: var(--radius); padding: 24px 26px; margin-bottom: 14px; color: #fff; position: relative; overflow: hidden; box-shadow: 0 6px 24px rgba(43,79,192,0.28); }
-  .exec::after { content: ''; position: absolute; right: -40px; top: -40px; width: 220px; height: 220px; border-radius: 50%; background: rgba(255,255,255,0.06); }
-  .exec .eyebrow { color: rgba(255,255,255,0.72); margin-bottom: 11px; }
-  .exec .headline { font-family: var(--display); font-size: 19px; font-weight: 600; line-height: 1.45; position: relative; max-width: 760px; }
-  .exec .headline b { color: #ffd9b0; font-weight: 700; }
-  .exec .by { font-size: 11.5px; color: rgba(255,255,255,0.6); margin-top: 14px; position: relative; }
-
   .stat-row { display: grid; grid-template-columns: repeat(4,1fr); gap: 13px; margin-bottom: 14px; }
   .stat { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px 18px; box-shadow: var(--shadow-sm); }
-  .stat .n { font-family: var(--display); font-size: 28px; font-weight: 700; letter-spacing: -0.01em; line-height: 1; }
+  .stat .n { font-family: var(--display); font-size: 28px; font-weight: 700; line-height: 1; }
   .stat .l { font-size: 11.5px; color: var(--ink-soft); margin-top: 7px; }
   .stat.warn .n { color: var(--alto); } .stat.bad .n { color: var(--extremo); } .stat.ok .n { color: var(--bajo); } .stat.brand .n { color: var(--brand); }
 
@@ -130,6 +123,16 @@
   .report .diag { background: var(--brand-tint-2); border-left: 3px solid var(--brand); }
   .report .pred { background: var(--moderado-bg); border-left: 3px solid var(--moderado); }
   .report .diag p, .report .pred p { margin: 0; }
+
+  /* resumen de riesgos por perspectiva (vista líder) */
+  .persp { display: flex; flex-direction: column; gap: 13px; }
+  .persp-item { }
+  .persp-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 5px; }
+  .persp-name { font-size: 13px; font-weight: 600; color: var(--ink); }
+  .persp-pct { font-family: var(--display); font-size: 15px; font-weight: 700; }
+  .persp-track { height: 7px; border-radius: 4px; background: var(--line); overflow: hidden; margin-bottom: 6px; }
+  .persp-track i { display: block; height: 100%; border-radius: 4px; }
+  .persp-why { font-size: 12.5px; color: var(--ink-soft); }
 
   table { width: 100%; border-collapse: collapse; }
   thead th { text-align: left; font-size: 10.5px; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-faint); font-weight: 600; padding: 9px 10px; border-bottom: 1px solid var(--line); }
@@ -177,29 +180,39 @@
   .prio-corto { background: var(--alto-bg); color: var(--alto); }
   .prio-mediano { background: var(--moderado-bg); color: #a9760d; }
 
-  .conn-flow { display: flex; align-items: stretch; gap: 0; flex-wrap: wrap; }
-  .conn-node { flex: 1; min-width: 148px; background: var(--surface-2); border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 14px 15px; }
-  .conn-node .cn-lbl { font-size: 10px; color: var(--brand-dark); text-transform: uppercase; letter-spacing: 0.05em; font-weight: 700; margin-bottom: 5px; }
-  .conn-node .cn-val { font-size: 13px; color: var(--ink); font-weight: 600; }
-  .conn-node .cn-sub { font-size: 11.5px; color: var(--ink-soft); margin-top: 3px; }
-  .conn-arrow { display: flex; align-items: center; color: var(--brand); font-size: 18px; padding: 0 11px; font-weight: 700; }
+  /* sugerencias de conexión (estrategia / modelo operativo) */
+  .conn-sugg { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
+  .conn-sugg:last-child { border-bottom: none; }
+  .conn-sugg .badge { font-size: 10px; font-weight: 700; padding: 3px 9px; border-radius: 8px; background: var(--brand-tint); color: var(--brand-dark); flex: none; text-transform: uppercase; letter-spacing: 0.03em; margin-top: 1px; }
+  .conn-sugg .cs-body { font-size: 13px; }
+  .conn-sugg .cs-body b { color: var(--ink); font-weight: 600; }
+  .conn-sugg .cs-body span { color: var(--ink-soft); }
 
-  .interconn .ic { display: flex; align-items: center; gap: 11px; padding: 12px 0; border-bottom: 1px solid var(--line-soft); }
-  .interconn .ic:last-child { border-bottom: none; }
-  .ic .link-ico { width: 26px; height: 26px; border-radius: 8px; background: var(--brand-tint); color: var(--brand); display: flex; align-items: center; justify-content: center; flex: none; font-size: 14px; }
-  .ic .from, .ic .to { font-weight: 600; color: var(--ink); font-size: 13px; }
-  .ic .via { color: var(--ink-soft); font-size: 12px; margin-top: 2px; }
+  /* grafo de interconexión */
+  .graph-legend { display: flex; gap: 16px; margin-top: 12px; flex-wrap: wrap; font-size: 11.5px; color: var(--ink-soft); }
+  .graph-legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .graph-legend i { width: 18px; height: 3px; border-radius: 2px; display: inline-block; }
 
   footer { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-faint); text-align: center; line-height: 1.8; }
-  footer b { font-family: var(--display); color: var(--ink-soft); font-weight: 700; letter-spacing: 0.02em; }
+  footer b { font-family: var(--display); color: var(--ink-soft); font-weight: 700; }
   .muted { color: var(--ink-faint); }
 
+  /* barra de chat fija (en pausa) */
+  .chatbar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--line); z-index: 60; box-shadow: 0 -2px 12px rgba(16,26,46,0.05); }
+  .chatbar-inner { max-width: 1220px; margin: 0 auto; padding: 13px 28px; display: flex; align-items: center; gap: 13px; }
+  .chatbar .ci { width: 30px; height: 30px; border-radius: 8px; background: var(--brand-tint); color: var(--brand); display: flex; align-items: center; justify-content: center; flex: none; font-weight: 700; }
+  .chatbar .field { flex: 1; display: flex; align-items: center; gap: 10px; background: var(--surface-2); border: 1px solid var(--line); border-radius: 10px; padding: 10px 14px; color: var(--ink-faint); font-size: 13px; }
+  .chatbar .soon { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--brand-dark); background: var(--brand-tint); padding: 3px 9px; border-radius: 20px; flex: none; }
+  .chatbar button { background: var(--line); color: var(--ink-faint); border: none; border-radius: 9px; padding: 10px 16px; font-family: var(--sans); font-size: 13px; font-weight: 600; cursor: not-allowed; flex: none; }
+
   @media (max-width: 920px) {
-    .row2, .row-12-1, .detail-inner, .events-strip { grid-template-columns: 1fr; }
+    .row2, .row-12-1, .detail-inner { grid-template-columns: 1fr; }
     .stat-row { grid-template-columns: repeat(2,1fr); }
     .appbar-inner { height: auto; padding: 12px 18px; flex-wrap: wrap; }
-    .wrap { padding: 20px 18px 50px; }
+    .wrap { padding: 20px 18px 30px; }
     .brand-text .full { display: none; }
+    .chatbar-inner { padding: 10px 18px; }
+    .chatbar .soon { display: none; }
   }
 </style>
 </head>
@@ -228,38 +241,49 @@
 
 <div class="wrap">
 
-  <div class="ribbon">
-    <div class="ctx">
-      <div class="item">Compañía: <b>SURA Colombia</b></div>
-      <div class="item">Periodo: <b>Cierre mayo 2026</b></div>
-      <div class="item">Procesos vigilados: <b>14</b></div>
+  <div class="proc-hero">
+    <div class="top">
+      <div>
+        <div class="eyebrow">Proceso en evaluación</div>
+        <h1>Facturación — Gestión de Ingresos y Costos</h1>
+      </div>
+      <div class="selector">Ver otro proceso <span class="chev">&#9662;</span></div>
     </div>
-    <div class="run-id">RUN-2026-0614 · 14 jun 2026</div>
+    <div class="proc-meta">
+      <span>Compañía: <b>CGR · Prestación Empresas</b></span>
+      <span>Macroproceso: <b>Gestión Financiera</b></span>
+      <span>Líder: <b>Laura Correa Mesa</b></span>
+      <span class="proc-state state-alerta"><span class="dot"></span>Estado: en alerta</span>
+    </div>
+    <div class="proc-events">
+      <div class="pe-label">Eventos recientes en este proceso</div>
+      <div class="pe-list" id="proc-events"></div>
+    </div>
   </div>
 
-  <div class="section-label"><span class="eyebrow">Eventos activos</span><span class="rule"></span><span class="eyebrow" style="color:var(--brand-dark)">el modelo se ejecutó por estos disparadores</span></div>
-  <div class="events-strip" id="events"></div>
-
+  <!-- ===================== VISTA LÍDERES ===================== -->
   <section class="view active" id="view-lideres">
-    <div class="exec">
-      <div class="eyebrow">Conclusión de MIGRO</div>
-      <div class="headline" id="exec-headline"></div>
-      <div class="by">Generado por el agente monitor · corrida RUN-2026-0614 · 14 jun 2026</div>
-    </div>
     <div class="stat-row">
-      <div class="stat bad"><div class="n">1</div><div class="l">Evento crítico de tu proceso</div></div>
+      <div class="stat bad"><div class="n">1</div><div class="l">Evento crítico activo</div></div>
       <div class="stat warn"><div class="n">2</div><div class="l">Alertas que requieren acción</div></div>
       <div class="stat brand"><div class="n">3</div><div class="l">Planes de acción sugeridos</div></div>
-      <div class="stat ok"><div class="n">68</div><div class="l">Score de salud del proceso</div></div>
+      <div class="stat ok"><div class="n">68</div><div class="l">Score del proceso</div></div>
     </div>
+
     <div class="row-12-1">
       <div>
         <div class="panel report">
-          <h2>Reporte del evento</h2>
-          <div class="sub">Diagnóstico y predicción generados para Facturación</div>
-          <p><b>Qué pasó.</b> El CEN Financiero rechazó 137 facturas ARL del cierre de mayo por inconsistencias en el cruce de conciliación. Esto deja en riesgo el ingreso del periodo por aproximadamente $2.400 millones.</p>
-          <div class="diag"><p><b>Diagnóstico.</b> Se materializó el riesgo R-01 (errores en conciliación ARL). El control de conciliación manual (C-01) tiene efectividad con oportunidad de mejora: no detectó las diferencias antes de emitir.</p></div>
-          <div class="pred"><p><b>Predicción.</b> Si el patrón se mantiene, el riesgo R-02 (no facturar servicios prestados) escalaría a residual alto en el próximo cierre, comprometiendo la meta del indicador de oportunidad de facturación.</p></div>
+          <h2>Reporte del proceso</h2>
+          <div class="sub">Diagnóstico y predicción según el estado actual</div>
+          <p><b>Estado general.</b> Tu proceso de Facturación está en alerta por un evento reciente: el CEN Financiero rechazó 137 facturas ARL del cierre de mayo, dejando en riesgo el ingreso del periodo por aproximadamente $2.400 millones.</p>
+          <div class="diag"><p><b>Diagnóstico.</b> Se materializó el riesgo R-01 (errores en conciliación ARL). El control de conciliación manual (C-01) tiene oportunidad de mejora: no detectó las diferencias antes de emitir.</p></div>
+          <div class="pred"><p><b>Predicción.</b> Si el patrón se mantiene, el riesgo R-02 (no facturar servicios prestados) escalaría a residual alto en el próximo cierre, comprometiendo la meta de oportunidad de facturación.</p></div>
+        </div>
+
+        <div class="panel">
+          <h2>Resumen de riesgos por perspectiva</h2>
+          <div class="sub">Dónde se concentra la exposición de tu proceso</div>
+          <div class="persp" id="persp"></div>
         </div>
       </div>
       <div>
@@ -268,86 +292,75 @@
           <div class="sub">Lo que necesita tu atención</div>
           <div id="lider-alerts"></div>
         </div>
-      </div>
-    </div>
-    <div class="row2">
-      <div class="panel">
-        <h2>Sugerencias del agente</h2>
-        <div class="sub">Acciones priorizadas para tu proceso</div>
-        <div class="sugg"><span class="ico">1</span><div><b>Automatizar el cruce de conciliación en GIROP.</b> <span>Reduce la validación manual que originó el rechazo. Prioridad corto plazo.</span></div></div>
-        <div class="sugg"><span class="ico">2</span><div><b>Crear alerta de pendientes por facturar al cierre.</b> <span>Control automático hoy inexistente (C-03). Prioridad inmediata.</span></div></div>
-        <div class="sugg"><span class="ico">3</span><div><b>Formalizar ANS con el equipo de capacidades.</b> <span>El archivo de conciliación llega sin acuerdo de nivel de servicio.</span></div></div>
-      </div>
-      <div class="panel">
-        <h2>Tu proceso y la estrategia</h2>
-        <div class="sub">A qué meta 2028 contribuye y cómo lo afecta el evento</div>
-        <div class="conn-flow">
-          <div class="conn-node"><div class="cn-lbl">Propósito</div><div class="cn-val">Transformar el modelo de operación</div><div class="cn-sub">Información segura, confiable y oportuna</div></div>
-          <div class="conn-arrow">&rarr;</div>
-          <div class="conn-node"><div class="cn-lbl">Meta 2028</div><div class="cn-val">95% efectividad control SOX</div><div class="cn-sub">El evento presiona esta meta a la baja</div></div>
+        <div class="panel">
+          <h2>Sugerencias del agente</h2>
+          <div class="sub">Acciones priorizadas para tu proceso</div>
+          <div class="sugg"><span class="ico">1</span><div><b>Automatizar el cruce de conciliación en GIROP.</b> <span>Reduce la validación manual que originó el rechazo. Prioridad corto plazo.</span></div></div>
+          <div class="sugg"><span class="ico">2</span><div><b>Crear alerta de pendientes por facturar.</b> <span>Control automático hoy inexistente (C-03). Prioridad inmediata.</span></div></div>
+          <div class="sugg"><span class="ico">3</span><div><b>Formalizar ANS con el equipo de capacidades.</b> <span>El archivo de conciliación llega sin acuerdo de nivel de servicio.</span></div></div>
         </div>
       </div>
     </div>
+
+    <div class="panel">
+      <h2>Tu proceso frente a la estrategia</h2>
+      <div class="sub">Sugerencias para alinear la gestión del riesgo con las metas 2028</div>
+      <div id="estrategia-sugg"></div>
+    </div>
   </section>
 
+  <!-- ===================== VISTA RIESGOS ===================== -->
   <section class="view" id="view-riesgos">
     <div class="stat-row">
-      <div class="stat brand"><div class="n">3</div><div class="l">Procesos con evento activo</div></div>
+      <div class="stat brand"><div class="n">6</div><div class="l">Riesgos del proceso</div></div>
       <div class="stat bad"><div class="n">1</div><div class="l">Score crítico (riesgo real)</div></div>
-      <div class="stat warn"><div class="n">1</div><div class="l">Score crítico (mala información)</div></div>
-      <div class="stat"><div class="n">14</div><div class="l">Riesgos en seguimiento</div></div>
+      <div class="stat warn"><div class="n">1</div><div class="l">Calidad de información baja</div></div>
+      <div class="stat"><div class="n">3</div><div class="l">Procesos interconectados</div></div>
     </div>
+
     <div class="panel">
       <h2>Score de procesos</h2>
-      <div class="sub">Criticidad por riesgo real y por calidad de información · ordenado por prioridad</div>
+      <div class="sub">Criticidad por riesgo real y por calidad de información · este proceso y sus conectados</div>
       <table>
         <thead><tr><th>Proceso</th><th>Compañía</th><th>Riesgo real</th><th>Calidad de info</th><th>Estado</th></tr></thead>
         <tbody id="score-rows"></tbody>
       </table>
     </div>
+
     <div class="row-12-1">
       <div class="panel">
         <h2>Mapa de calor — Facturación</h2>
-        <div class="sub">Riesgo residual de los 6 riesgos del proceso disparado</div>
+        <div class="sub">Riesgo residual de los 6 riesgos del proceso</div>
         <div class="heat" id="heat"></div>
         <div class="heat-axis">Probabilidad &rarr;</div>
       </div>
       <div class="panel">
         <h2>Interconexión entre procesos</h2>
-        <div class="sub">Cómo el evento se propaga a otros procesos</div>
-        <div class="interconn" id="interconn"></div>
+        <div class="sub">El color de cada conexión indica su nivel de importancia</div>
+        <svg id="graph" width="100%" viewBox="0 0 420 300" role="img" aria-label="Grafo de interconexión entre procesos"></svg>
+        <div class="graph-legend">
+          <span><i style="background:var(--extremo)"></i>Alta</span>
+          <span><i style="background:var(--alto)"></i>Media</span>
+          <span><i style="background:var(--bajo)"></i>Baja</span>
+        </div>
       </div>
     </div>
+
     <div class="panel">
-      <h2>Conexión con el modelo operativo</h2>
-      <div class="sub">Dónde se ubica el proceso disparado dentro del sistema de valor</div>
-      <div class="conn-flow">
-        <div class="conn-node"><div class="cn-lbl">Macroproceso</div><div class="cn-val">Gestión Financiera</div><div class="cn-sub">Sistema de valor</div></div>
-        <div class="conn-arrow">&rarr;</div>
-        <div class="conn-node"><div class="cn-lbl">Proceso</div><div class="cn-val">Gestión Ingresos y Costos</div><div class="cn-sub">CGR · Prestación Empresas</div></div>
-        <div class="conn-arrow">&rarr;</div>
-        <div class="conn-node"><div class="cn-lbl">Actividad origen</div><div class="cn-val">Conciliación ARL</div><div class="cn-sub">Donde se materializó el evento</div></div>
-      </div>
+      <h2>Lectura del modelo operativo</h2>
+      <div class="sub">Sugerencias a partir de la ubicación del proceso en el sistema de valor</div>
+      <div id="modelo-sugg"></div>
     </div>
+
     <div class="panel">
-      <h2>Conexión estrategia · realidad de la compañía · procesos</h2>
-      <div class="sub">Cómo el comportamiento real del proceso impacta las metas estratégicas</div>
-      <div class="conn-flow">
-        <div class="conn-node"><div class="cn-lbl">Estrategia</div><div class="cn-val">Sostenibilidad financiera</div><div class="cn-sub">ROE &gt;23% · gasto controlado</div></div>
-        <div class="conn-arrow">&rarr;</div>
-        <div class="conn-node"><div class="cn-lbl">Realidad (dato)</div><div class="cn-val">$2.400M en riesgo</div><div class="cn-sub">Ingreso del periodo comprometido</div></div>
-        <div class="conn-arrow">&rarr;</div>
-        <div class="conn-node"><div class="cn-lbl">Proceso</div><div class="cn-val">Facturación</div><div class="cn-sub">Evento activo · score crítico</div></div>
-      </div>
-    </div>
-    <div class="panel">
-      <h2>Riesgos del proceso disparado</h2>
+      <h2>Riesgos del proceso</h2>
       <div class="sub">Clic en una fila para ver causas, controles y tratamiento</div>
       <table class="rtable">
         <thead><tr><th>Riesgo</th><th>Categoría</th><th>Inherente</th><th>Residual</th><th>Tratamiento</th></tr></thead>
         <tbody id="risk-rows"></tbody>
       </table>
     </div>
+
     <div class="panel">
       <h2>Indicadores del proceso</h2>
       <div class="sub">Tomados del insumo y evaluados contra meta</div>
@@ -364,32 +377,66 @@
   </footer>
 </div>
 
+<div class="chatbar">
+  <div class="chatbar-inner">
+    <div class="ci">M</div>
+    <div class="field">Pregúntale a MIGRO sobre este proceso, sus riesgos o sus eventos… <span style="flex:1"></span><span class="soon">Próximamente</span></div>
+    <button disabled>Enviar</button>
+  </div>
+</div>
+
 <script>
 const EVENTS = [
-  { id:'EV-01', proc:'Facturación', sev:'extremo', time:'hace 2 h', title:'Rechazo masivo de facturas ARL en el CEN Financiero', meta:'137 facturas · ~$2.400M' },
-  { id:'EV-02', proc:'Atención en Salud', sev:'alto', time:'hace 6 h', title:'Oportunidad de cita de primera vez por debajo de meta', meta:'4.2 días vs 3 días' },
-  { id:'EV-03', proc:'Procesos Judiciales', sev:'moderado', time:'hace 1 día', title:'Demanda con pretensión atípica sin reserva a tiempo', meta:'3.2x el promedio del ramo' }
+  { id:'EV-01', sev:'extremo', time:'hace 2 h', title:'Rechazo masivo de facturas ARL en el CEN Financiero', meta:'137 facturas · ~$2.400M en riesgo' },
+  { id:'EV-02', sev:'moderado', time:'hace 3 días', title:'Diferencia menor entre módulos SD y FI de SAP', meta:'Conciliada en el cierre' }
 ];
-const EXEC = 'Un <b>evento crítico</b> en Facturación dejó <b>$2.400M de ingreso en riesgo</b> por el rechazo de 137 facturas ARL. El control de conciliación falló en detectarlo a tiempo. Se recomiendan 3 acciones, una de prioridad inmediata.';
 const ALERTS = [
-  { sev:'extremo', title:'Ingreso del periodo en riesgo', desc:'137 facturas ARL rechazadas por el CEN Financiero por inconsistencias de conciliación.', proc:'Facturación · R-01' },
-  { sev:'alto', title:'Control sin cobertura automática', desc:'No existe alerta de pendientes por facturar al cierre; el riesgo R-02 podría escalar.', proc:'Facturación · R-02' }
+  { sev:'extremo', title:'Ingreso del periodo en riesgo', desc:'137 facturas ARL rechazadas por el CEN Financiero por inconsistencias de conciliación.', proc:'R-01' },
+  { sev:'alto', title:'Control sin cobertura automática', desc:'No existe alerta de pendientes por facturar al cierre; el riesgo R-02 podría escalar.', proc:'R-02' }
+];
+const PERSPECTIVAS = [
+  { nombre:'Financiero', pct:48, why:'el rechazo de facturas ARL compromete el ingreso del periodo y la conciliación es manual.' },
+  { nombre:'Operativo', pct:35, why:'la dependencia del archivo de conciliación de un tercero introduce demoras.' },
+  { nombre:'Legal / regulatorio', pct:18, why:'el rechazo DIAN tiene control efectivo; exposición acotada.' },
+  { nombre:'Reputacional', pct:12, why:'sin impacto directo a cliente final en el evento actual.' }
+];
+const ESTRATEGIA_SUGG = [
+  { badge:'Sostenibilidad', b:'Prioriza la automatización de la conciliación.', s:'Es la palanca que más protege la meta de sostenibilidad financiera (ROE >23%), porque el ingreso en riesgo afecta directamente el resultado.' },
+  { badge:'Modelo digital', b:'Conecta este proceso con la meta de control SOX.', s:'Aunque hoy lo tratamos como no-SOX, su naturaleza financiera lo acerca a la meta de 95% de efectividad en control interno; conviene anticiparlo.' },
+  { badge:'Información', b:'Refuerza la calidad del dato de conciliación.', s:'La meta de información confiable y oportuna se ve directamente comprometida por los archivos incompletos de terceros.' }
+];
+const MODELO_SUGG = [
+  { badge:'Ubicación', b:'Este proceso es nodo crítico de Gestión Financiera.', s:'Al estar en el macroproceso financiero, sus fallas se propagan al cierre contable; conviene tratarlo como proceso de alta prioridad en el modelo operativo.' },
+  { badge:'Frontera', b:'Revisa la frontera con Conciliación de servicios.', s:'El evento nació en la actividad de conciliación ARL, que depende de un proceso vecino; vale la pena formalizar esa entrega entre procesos.' },
+  { badge:'Propagación', b:'Vigila el enlace con Contabilización.', s:'Una falla aquí distorsiona directamente el módulo FI de SAP; el modelo operativo debería reflejar esa dependencia como punto de control.' }
 ];
 const SCORE = [
   { proc:'Facturación', comp:'CGR · Prestación Empresas', real:82, info:45, motivo:'real' },
-  { proc:'Atención en Salud', comp:'SURA Colombia', real:61, info:38, motivo:'real' },
-  { proc:'Procesos Judiciales', comp:'Filiales Suramericana', real:44, info:78, motivo:'info' },
-  { proc:'Conciliación de servicios', comp:'CGR · Prestación Empresas', real:35, info:30, motivo:'-' }
-];
-const INTERCONN = [
-  { from:'Facturación', to:'Conciliación de servicios', via:'recibe el archivo de conciliación que originó el rechazo', impact:'alto' },
-  { from:'Facturación', to:'Contabilización (SAP FI)', via:'el ingreso no facturado distorsiona el cierre contable', impact:'alto' },
-  { from:'Facturación', to:'Atención en Salud', via:'servicios prestados no facturados nacen en la operación asistencial', impact:'moderado' }
+  { proc:'Conciliación de servicios', comp:'CGR · Prestación Empresas', real:48, info:62, motivo:'info' },
+  { proc:'Contabilización', comp:'CGR · Prestación Empresas', real:40, info:30, motivo:'-' },
+  { proc:'Atención en Salud', comp:'SURA Colombia', real:61, info:38, motivo:'real' }
 ];
 const INDICADORES = [
   { nombre:'Tasa de cumplimiento de contratos facturables', meta:'90%', actual:'81%', estado:'alto' },
   { nombre:'Oportunidad en la facturación al asegurador', meta:'&le;1', actual:'1.4', estado:'moderado' }
 ];
+const GRAPH = {
+  nodes: [
+    { id:'fact', label:'Facturación', x:210, y:90, main:true },
+    { id:'conc', label:'Conciliación', x:80, y:170 },
+    { id:'cont', label:'Contabilización', x:330, y:160 },
+    { id:'salud', label:'Atención Salud', x:150, y:250 },
+    { id:'cart', label:'Cartera', x:340, y:255 }
+  ],
+  edges: [
+    { from:'fact', to:'conc', nivel:'alto' },
+    { from:'fact', to:'cont', nivel:'alto' },
+    { from:'fact', to:'salud', nivel:'moderado' },
+    { from:'fact', to:'cart', nivel:'bajo' },
+    { from:'conc', to:'salud', nivel:'moderado' }
+  ]
+};
+
 const IMP = ['insignificante','menor','moderado','grave','critico'];
 const PROB = ['muy_baja','baja','moderada','alta','muy_alta'];
 const IMP_LBL = { insignificante:'Insignif.', menor:'Menor', moderado:'Moderado', grave:'Grave', critico:'Crítico' };
@@ -428,12 +475,22 @@ RIESGOS.forEach(r=>{ r.nivel_res=nivelDe(r.imp_res,r.prob_res); r.nivel_inh=nive
 const EFF_LBL = { efectivo:['Efectivo','eff-efectivo'], efectivo_con_oportunidad:['Con oportunidad','eff-oportunidad'], inefectivo:['Inefectivo','eff-inefectivo'] };
 const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
 function pill(n){ return '<span class="pill pill-'+n+'">'+cap(n)+'</span>'; }
+function pctColor(v){ return v>=45?'var(--extremo)':v>=30?'var(--alto)':v>=18?'var(--moderado)':'var(--bajo)'; }
 
-document.getElementById('events').innerHTML = EVENTS.map(e=>
-  '<div class="event-card sev-'+e.sev+'"><div class="ev-top"><span class="ev-proc">'+e.proc+'</span><span class="ev-sev">'+e.sev+'</span></div><div class="ev-title">'+e.title+'</div><div class="ev-foot"><span class="ev-meta">'+e.meta+'</span><span class="ev-time">'+e.time+'</span></div></div>').join('');
-document.getElementById('exec-headline').innerHTML = EXEC;
+document.getElementById('proc-events').innerHTML = EVENTS.map(e=>
+  '<div class="pe-item sev-'+e.sev+'"><div class="pe-body"><div class="pe-title">'+e.title+'</div><div class="pe-meta">'+e.meta+'</div></div><span class="pe-badge">'+e.sev+'</span><span class="pe-time">'+e.time+'</span></div>').join('');
+
 document.getElementById('lider-alerts').innerHTML = ALERTS.map(a=>
   '<div class="alert"><div class="sev '+a.sev+'"></div><div class="a-body"><div class="a-title">'+a.title+'</div><div class="a-desc">'+a.desc+'</div><div class="a-proc">'+a.proc+'</div></div></div>').join('');
+
+document.getElementById('persp').innerHTML = PERSPECTIVAS.map(p=>
+  '<div class="persp-item"><div class="persp-head"><span class="persp-name">'+p.nombre+'</span><span class="persp-pct" style="color:'+pctColor(p.pct)+'">'+p.pct+'%</span></div><div class="persp-track"><i style="width:'+p.pct+'%;background:'+pctColor(p.pct)+'"></i></div><div class="persp-why">Tu proceso en lo '+p.nombre.toLowerCase()+' tiene un '+p.pct+'% de exposición porque '+p.why+'</div></div>').join('');
+
+document.getElementById('estrategia-sugg').innerHTML = ESTRATEGIA_SUGG.map(s=>
+  '<div class="conn-sugg"><span class="badge">'+s.badge+'</span><div class="cs-body"><b>'+s.b+'</b> <span>'+s.s+'</span></div></div>').join('');
+document.getElementById('modelo-sugg').innerHTML = MODELO_SUGG.map(s=>
+  '<div class="conn-sugg"><span class="badge">'+s.badge+'</span><div class="cs-body"><b>'+s.b+'</b> <span>'+s.s+'</span></div></div>').join('');
+
 function scoreBar(v, color){ return '<span class="score-bar"><span class="bar"><i style="width:'+v+'%;background:'+color+'"></i></span><span class="score-num muted">'+v+'</span></span>'; }
 document.getElementById('score-rows').innerHTML = SCORE.map(s=>{
   const rc = s.real>=70?'var(--extremo)':s.real>=50?'var(--alto)':'var(--moderado)';
@@ -441,10 +498,10 @@ document.getElementById('score-rows').innerHTML = SCORE.map(s=>{
   const tag = s.motivo==='real'?'<span class="pill pill-extremo">Riesgo real</span>':s.motivo==='info'?'<span class="pill pill-alto">Mala info</span>':'<span class="muted">—</span>';
   return '<tr><td><b style="color:var(--ink)">'+s.proc+'</b></td><td class="muted" style="font-size:12px">'+s.comp+'</td><td>'+scoreBar(s.real,rc)+'</td><td>'+scoreBar(s.info,ic)+'</td><td>'+tag+'</td></tr>';
 }).join('');
-document.getElementById('interconn').innerHTML = INTERCONN.map(i=>
-  '<div class="ic"><span class="link-ico">&harr;</span><div style="flex:1"><div><span class="from">'+i.from+'</span> <span class="muted">&rarr;</span> <span class="to">'+i.to+'</span></div><div class="via">'+i.via+'</div></div>'+pill(i.impact)+'</div>').join('');
+
 document.getElementById('ind-rows').innerHTML = INDICADORES.map(i=>
   '<tr><td>'+i.nombre+'</td><td class="muted">'+i.meta+'</td><td><b style="color:var(--ink)">'+i.actual+'</b></td><td>'+pill(i.estado)+'</td></tr>').join('');
+
 (function(){
   const counts={}; RIESGOS.forEach(r=>{const k=r.imp_res+'|'+r.prob_res;(counts[k]=counts[k]||[]).push(r.id);});
   let h='<div></div>'; PROB.forEach(p=>h+='<div class="col-h">'+PROB_LBL[p]+'</div>');
@@ -453,6 +510,22 @@ document.getElementById('ind-rows').innerHTML = INDICADORES.map(i=>
       h+='<div class="cell lvl-'+lvl+' '+(n?'':'empty')+'" title="'+(counts[k]?counts[k].join(', '):'')+'">'+(n||'·')+'</div>'; }); });
   document.getElementById('heat').innerHTML=h;
 })();
+
+(function(){
+  const svg=document.getElementById('graph');
+  const col={alto:'var(--extremo)', moderado:'var(--alto)', bajo:'var(--bajo)'};
+  const w={alto:3.2, moderado:2.2, bajo:1.4};
+  const nodeById=id=>GRAPH.nodes.find(n=>n.id===id);
+  let s='';
+  GRAPH.edges.forEach(e=>{ const a=nodeById(e.from), b=nodeById(e.to);
+    s+='<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" stroke="'+col[e.nivel]+'" stroke-width="'+w[e.nivel]+'" stroke-linecap="round" opacity="0.85"/>'; });
+  GRAPH.nodes.forEach(n=>{ const r=n.main?9:6.5;
+    s+='<circle cx="'+n.x+'" cy="'+n.y+'" r="'+r+'" fill="'+(n.main?'var(--brand)':'#fff')+'" stroke="'+(n.main?'var(--brand)':'var(--ink-faint)')+'" stroke-width="2"/>';
+    const ty=n.y - (r+7);
+    s+='<text x="'+n.x+'" y="'+ty+'" text-anchor="middle" font-size="11" font-weight="'+(n.main?'700':'500')+'" fill="var(--ink)" font-family="Inter,sans-serif">'+n.label+'</text>'; });
+  svg.innerHTML=s;
+})();
+
 document.getElementById('risk-rows').innerHTML = RIESGOS.map((r,i)=>{
   const ord=['bajo','moderado','alto','extremo'];
   const bajo = ord.indexOf(r.nivel_res) < ord.indexOf(r.nivel_inh);
@@ -464,6 +537,7 @@ document.getElementById('risk-rows').innerHTML = RIESGOS.map((r,i)=>{
   return row+det;
 }).join('');
 function tg(i){ document.getElementById('d-'+i).classList.toggle('open'); }
+
 function setView(v){
   document.getElementById('view-lideres').classList.toggle('active', v==='lideres');
   document.getElementById('view-riesgos').classList.toggle('active', v==='riesgos');
