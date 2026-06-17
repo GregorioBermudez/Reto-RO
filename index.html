@@ -451,7 +451,7 @@ const RIESGOS = [
   { id:'R-02', desc:'No facturar servicios efectivamente prestados', cat:'Ejecución de procesos', imp_inh:'critico', prob_inh:'alta', imp_res:'grave', prob_res:'moderada',
     causas:[{f:'Procesos',d:'Sin alerta sistemática de no facturados'}],
     controles:[{id:'C-02', desc:'Informe mensual de ingresos vs presupuesto', estado:'Activo', nat:'detectivo', auto:'semiautomatico', eff:'efectivo', accion:'mantener', prop:false},
-               {id:'C-03', desc:'Alerta automática de pendientes por facturar', estado:'No existe', nat:'detectivo', auto:'automatico', eff:'oportunidad', accion:'crear', prop:true}],
+               {id:'C-03', desc:'Alerta automática de pendientes por facturar', estado:'No existe', nat:'detectivo', auto:'automatico', eff:'inefectivo', accion:'crear', prop:true}],
     trat:{tipo:'reducir', just:'Impacto alto; requiere control automático', plan:[{prio:'inmediata', d:'Crear control automático de pendientes'}]} },
   { id:'R-03', desc:'Rechazo de facturas por la DIAN que retrasa el ingreso', cat:'Fallas tecnológicas', imp_inh:'moderado', prob_inh:'moderada', imp_res:'menor', prob_res:'baja',
     causas:[{f:'Tecnología',d:'Inconsistencias en viaje al CEN Financiero'}],
